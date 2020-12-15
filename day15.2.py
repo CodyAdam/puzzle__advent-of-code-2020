@@ -1,27 +1,22 @@
 IN = open("day15.txt", "r").read().split(",")
 
-liste = dict()
+k = dict()
 
-for i in range(len(IN)):
-    liste[int(IN[i])] = i+1
+for i in range(len(IN) - 1):
+    k[int(IN[i])] = i + 1
 
-turn = 3
-current = 6
+turn = len(IN)
+current = int(IN[len(IN) - 1])
 
-
-def count(key):
-    if liste[key] == turn-1:
-        liste[key] = turn
-        return 0
+print(k)
+while turn < 30000000:
+    if current in k:
+        tmp = k[current]
+        k[current] = turn
+        current = turn - tmp
     else:
-        tmp = liste[key]
-        liste[key] = turn
-        return turn - tmp
-
-
-while turn < 10:
-    print(liste)
-    print(current)
-    current = count(current)
+        k[current] = turn
+        current = 0
     turn += 1
-# 34min
+
+print(current)
