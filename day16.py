@@ -63,3 +63,4 @@ for x in ans:
     for y in x:
         sum += y
 print(sum)
+#1h

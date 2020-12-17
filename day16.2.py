@@ -104,3 +104,4 @@ print(assoc)
 myTi = [int(x) for x in IN[1][1].split(",")]
 print(myTi)
 print(myTi[12] * myTi[8] * myTi[10] * myTi[13] * myTi[14] * myTi[16])
+#1h13
