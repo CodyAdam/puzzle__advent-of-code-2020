@@ -54,10 +54,11 @@ def subStringify(str):
 
 sum = 0
 for line in IN:
-    arr = subStringify(line)
     print(line)
+    arr = subStringify(line)
+    print(arr)
     sum += calc(arr)
-    print(calc(arr))
+    # print(calc(arr))
 print(sum)
 
 # 52 min

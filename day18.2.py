@@ -81,6 +81,7 @@ def applyPrecedence(arr):
 sum = 0
 for line in IN:
     arr = subStringify(line)
+    print(arr)
     arr = applyPrecedence(arr)
     print(arr)
     print(calc(arr))
