@@ -89,31 +89,30 @@ def draw():
         print(line)
 
 
-def verify(strTest, rule):
-    if type(rule) is str:
-        match = rule.replace("\"", "")
-        our = strTest[0:len(match)]
-        if our == match:
-            return len(match)
-        return 0
-    elif len(rule) is 1:
-        return verify(strTest, rule[0])
+# def verify(strTest, rule):
+#     if type(rule) is str:
+#         match = rule.replace("\"", "")
+#         our = strTest[0:len(match)]
+#         if our == match:
+#             return len(match)
+#         return 0
+#     elif len(rule) is 1:
+#         return verify(strTest, rule[0])
 
-    for i in range(len(rule)):
-        r = rule[i]
-        if r is "*":
-            first = verify(strTest, rule[i - 1])
-            if first == 0:
-                return 0
-            second = verify(strTest[first:], rule[i + 1])
-            if second == 0:
-                return 0
-            return first + second
-        elif r is "+":
-            first = verify(strTest, rule[i - 1])
-            second = verify(strTest, rule[i - 1])
-            return max(first, second)
-
+#     for i in range(len(rule)):
+#         r = rule[i]
+#         if r is "*":
+#             first = verify(strTest, rule[i - 1])
+#             if first == 0:
+#                 return 0
+#             second = verify(strTest[first:], rule[i + 1])
+#             if second == 0:
+#                 return 0
+#             return first + second
+#         elif r is "+":
+#             first = verify(strTest, rule[i - 1])
+#             second = verify(strTest, rule[i - 1])
+#             return max(first, second)
 
 for i in range(len(rules)):
     print(rules[i])
@@ -121,6 +120,3 @@ for i in range(len(rules)):
     rules[i] = applyPrecedence(rules[i])
 rules[0] = replaceIndex(rules[0])
 print(rules[0])
-
-for test in toTest:
-    print(verify(test, rules[0]))
