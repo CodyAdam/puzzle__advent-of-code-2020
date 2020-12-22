@@ -73,4 +73,4 @@ if (playGame(decks) == 2):
     print(getAns(decks[1]))
 else:
     print(getAns(decks[0]))
-#18 min
+#39 min
