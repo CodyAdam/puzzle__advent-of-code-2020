@@ -58,8 +58,20 @@ def getBorder():
             tiles[tile][side] = (value, reversedValue)
 
 
+def draw2():
+    for tile in tiles:
+        current = tiles[tile]
+        print("------------ " + str(tile) + " ------------ ")
+        print("           " + str(current['top']))
+        print(
+            str(tiles[tile]["left"]) + "               " +
+            str(tiles[tile]["right"]))
+        print("           " + str(tiles[tile]["bot"]))
+        print("          ")
+
+
 init()
 draw()
 getBorder()
-print(tiles)
+draw2()
 #45min
