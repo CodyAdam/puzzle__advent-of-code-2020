@@ -1,0 +1,122 @@
+IN = [line for line in open("day24.txt", "r").read().splitlines()]
+
+SIZE = 240
+
+#False = white
+#True = Black
+grid = [[False for y in range(SIZE)] for x in range(SIZE)]
+
+refX = int(SIZE / 2)
+refY = int(SIZE / 2)
+
+dire = ["e", "se", "sw", "w", "nw", "ne"]
+
+
+def draw():
+    s = ""
+    for y in range(SIZE):
+        if y % 2 != 0:
+            s += " "
+        for x in range(SIZE):
+            if y == refY and x == refX:
+                s += ("O" if not grid[y][x] else "X") + " "
+            else:
+                s += ("." if not grid[y][x] else "#") + " "
+        s += "\n"
+    print(s)
+
+
+def flip(cx, cy, line):
+    s = ""
+    if line == "":
+        grid[cy][cx] = not grid[cy][cx]
+        return
+    for char in line:
+        s += char
+        if s in dire:
+            if s == "e":
+                flip(cx + 1, cy, line[len(s):])
+            elif s == "se":
+                if cy % 2 != 0:
+                    flip(cx + 1, cy + 1, line[len(s):])
+                else:
+                    flip(cx, cy + 1, line[len(s):])
+            elif s == "sw":
+                if cy % 2 != 0:
+                    flip(cx, cy + 1, line[len(s):])
+                else:
+                    flip(cx - 1, cy + 1, line[len(s):])
+            elif s == "w":
+                flip(cx - 1, cy, line[len(s):])
+            elif s == "nw":
+                if cy % 2 != 0:
+                    flip(cx, cy - 1, line[len(s):])
+                else:
+                    flip(cx - 1, cy - 1, line[len(s):])
+            elif s == "ne":
+                if cy % 2 != 0:
+                    flip(cx + 1, cy - 1, line[len(s):])
+                else:
+                    flip(cx, cy - 1, line[len(s):])
+            s = ""
+            return
+        else:
+            continue
+
+
+def countAdjacent(x, y):
+    ans = 0
+    ans += 1 if grid[y][x + 1] else 0
+    if y % 2 != 0:
+        ans += 1 if grid[y + 1][x + 1] else 0
+    else:
+        ans += 1 if grid[y + 1][x] else 0
+    if y % 2 != 0:
+        ans += 1 if grid[y + 1][x] else 0
+    else:
+        ans += 1 if grid[y + 1][x - 1] else 0
+    ans += 1 if grid[y][x - 1] else 0
+    if y % 2 != 0:
+        ans += 1 if grid[y - 1][x] else 0
+    else:
+        ans += 1 if grid[y - 1][x - 1] else 0
+    if y % 2 != 0:
+        ans += 1 if grid[y - 1][x + 1] else 0
+    else:
+        ans += 1 if grid[y - 1][x] else 0
+    return ans
+
+
+def dayTick():
+    global grid
+    newGrid = [[x for x in y] for y in grid]
+    for y in range(SIZE):
+        for x in range(SIZE):
+            if x != 0 and x < SIZE - 1 and y != 0 and y < SIZE - 1:
+                c = countAdjacent(x, y)
+                if grid[y][x]:
+                    if c == 0 or c > 2:
+                        newGrid[y][x] = False
+                else:
+                    if c == 2:
+                        newGrid[y][x] = True
+    grid = newGrid
+
+
+def count():
+    summ = 0
+    for line in grid:
+        for x in line:
+            if x:
+                summ += 1
+    return summ
+
+
+for line in IN:
+    flip(refX, refY, line)
+draw()
+for day in range(1, 100 + 1):
+    dayTick()
+    print("Day : " + str(day) + "   " + str(count()))
+
+#16 min
