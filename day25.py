@@ -26,4 +26,5 @@ def findSize(x):
     return size
 
 
-loopSize(7, 4711642)
+# findSize(16616892)
+print(loopSize(7, 4711642))
