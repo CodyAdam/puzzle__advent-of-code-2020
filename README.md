@@ -7,4 +7,8 @@ You don't need a computer science background to participate - just a little prog
 # puzzle__advent-of-code-2020
 https://adventofcode.com/
 
+# My score
+There is 25 level with 2 points to gain on each
+
+I did **45/50 points** this year
 ![result](result.png)
